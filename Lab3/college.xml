@@ -1,0 +1,37 @@
+<?xml version="1.0" standalone="yes"?>
+<?xml-stylesheet type='text/xsl' href='firstxsl.xsl'?>
+<college>
+	<person>
+		<name>Liam</name>
+		<age>38</age>
+		<position>Lecturer</position>
+		<gender>Male</gender>
+	</person>
+	<person>
+		<name>Denitsa</name>
+		<age>34</age>
+		<position>Student</position>
+		<gender>Female</gender>
+	</person>
+	
+	<person>
+		<name>Gerry</name>
+		<age>28</age>
+		<position>Student</position>
+		<gender>Male</gender>
+	</person>
+	
+	<person>
+		<name>Claire</name>
+		<age>31</age>
+		<position>Student</position>
+		<gender>Female</gender>
+	</person>
+	
+	<person>
+		<name>Karim</name>
+		<age>31</age>
+		<position>Student</position>
+		<gender>Male</gender>
+	</person>
+</college>

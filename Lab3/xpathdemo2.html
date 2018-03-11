@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+body {text-align: center;background: #000000;}
+#main {
+background-repeat:no-repeat;
+background-position:right center;
+background-image: url("../images/face.jpg");
+width: 90%;
+display: inline-block;
+min-height: 900px;
+}
+
+.input {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+}
+
+#headx {
+color: #ffffff;
+font-size: 50px;
+padding: 2%;	
+
+width: 70%;
+display: inline-block;
+border-radius: 8px;
+}
+
+#buttonhold {
+color: #FFFFFF;
+font-size: 50px;
+padding: 12px;	
+background-color: rgba(255, 0, 0, 0.3);
+width: 70%;
+display: inline-block;
+border-radius: 8px;
+}
+
+.pars {
+color: #FFFFFF;
+font-size: 50px;
+padding: 12px;	
+background-color: rgba(000, 0, 0, 0.7);
+width: 70%;
+display: inline-block;
+}
+
+.norm {
+color: #FFFFFF;
+font-size: 16px;
+padding: 12px;	
+background-color: rgba(000, 0, 0, 0.7);
+width: 70%;
+display: inline-block;
+}
+
+.alertx {
+color: #FFFFFF;
+font-size: 22px;
+width: 70%;
+display: inline-block;
+}
+
+.button {
+    background-color: #ffffff;
+    border: none;
+    color: #555;
+    padding: 5px 12px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 20px;
+    margin: 4px 2px;
+    cursor: pointer;
+	border-radius: 8px;
+}
+
+input[type=text], select {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+</style>
+
+</head>
+<body >
+
+<div id="main">
+
+<h2 id="headx">Using Xpath to display results</h2>
+<p class="pars" id="demo">Pressing the button will change the content of the website dynamically and list all college related people</p>
+<br>
+<button class="button" type="button" onclick="doItNow()">Change Content</button>
+<input id="check" class="input" id="check" placeholder="Check This Input for Task 4">
+<br>
+<p class="pars">This content is taken from an extrnal document and as such does not need to be coded into the content of the page.</p>
+<p>Can be calles with page load, Timeres, events etc...</p>
+
+<script>
+function doItNow(){
+var xhttp = new XMLHttpRequest();
+xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+        showResult(xhttp.responseXML);
+    }
+};
+xhttp.open("GET", "college.xml", true);
+xhttp.send(); 
+
+function showResult(xml) {
+    var txt = "";
+	var xc = x = document.getElementById("check").value;
+    path = "college/person["+xc+"]/name"; //path = "college/person["+xc+"]/name";
+    if (xml.evaluate) {
+        var nodes = xml.evaluate(path, xml, null, XPathResult.ANY_TYPE, null);
+        var result = nodes.iterateNext();
+        while (result) {
+            txt += result.childNodes[0].nodeValue + "<br>";
+            result = nodes.iterateNext();
+        } 
+    // Code For Internet Explorer
+    } else if (window.ActiveXObject || xhttp.responseType == "msxml-document") {
+        xml.setProperty("SelectionLanguage", "XPath");
+        nodes = xml.selectNodes(path);
+        for (i = 0; i < nodes.length; i++) {
+            txt += nodes[i].childNodes[0].nodeValue + "<br>";
+        }
+    }
+    document.getElementById("demo").innerHTML = txt;
+}
+}
+</script>
+
+</div>
+</body>
+</html>
